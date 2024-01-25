@@ -3,10 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Repository } from 'typeorm';
+import { UserModule } from './user/user.module';
+import { User } from './user/entities/user.entity';
+import { join } from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    //TypeOrmModule.forFeature([User]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -16,12 +21,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [],
+        entities: [join(process.cwd(), 'dist/**/*.entity.js')],
         synchronize: true,
+        driver: require("mysql"),
       }),
       inject: [ConfigService],
     }),
+    UserModule,
   ],
+  exports: [TypeOrmModule],
   controllers: [AppController],
   providers: [AppService],
 })
