@@ -3,15 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { Repository } from 'typeorm';
 import { UserModule } from './user/user.module';
-import { User } from './user/entities/user.entity';
 import { join } from 'path';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    //TypeOrmModule.forFeature([User]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -28,6 +26,7 @@ import { join } from 'path';
       inject: [ConfigService],
     }),
     UserModule,
+    ProductModule,
   ],
   exports: [TypeOrmModule],
   controllers: [AppController],
