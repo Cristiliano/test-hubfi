@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { join } from 'path';
 import { ProductModule } from './product/product.module';
 import { PurchaseModule } from './purchase/purchase.module';
+import { KickbackModule } from './kickback/kickback.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { PurchaseModule } from './purchase/purchase.module';
     UserModule,
     ProductModule,
     PurchaseModule,
+    KickbackModule,
   ],
   exports: [TypeOrmModule],
   controllers: [AppController],
