@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from "src/product/entities/product.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum KickbackTypes{
     FIXED = 'fixed',
@@ -24,4 +25,8 @@ export class Kickback {
         default: KickbackTypes.FIXED,
     })
     type: KickbackTypes
+
+    @OneToOne((type) => Product)
+    @JoinColumn()
+    product: Product;
 }
