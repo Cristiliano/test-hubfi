@@ -8,6 +8,7 @@ import { join } from 'path';
 import { ProductModule } from './product/product.module';
 import { PurchaseModule } from './purchase/purchase.module';
 import { KickbackModule } from './kickback/kickback.module';
+import { KickbackGeneratedModule } from './kickback-generated/kickback-generated.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { KickbackModule } from './kickback/kickback.module';
     ProductModule,
     PurchaseModule,
     KickbackModule,
+    KickbackGeneratedModule,
   ],
   exports: [TypeOrmModule],
   controllers: [AppController],

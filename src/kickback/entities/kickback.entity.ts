@@ -1,3 +1,4 @@
+import { KickbackGenerated } from "src/kickback-generated/entities/kickback-generated.entity";
 import { Product } from "src/product/entities/product.entity";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -29,4 +30,8 @@ export class Kickback {
     @OneToOne((type) => Product)
     @JoinColumn()
     product: Product;
+
+    @OneToOne((type) => KickbackGenerated)
+    @JoinColumn()
+    kickbackGenerated: KickbackGenerated;
 }
